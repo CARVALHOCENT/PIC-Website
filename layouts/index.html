@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="pt" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElectroCap - Deteção de Incêndios</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1B4D3E',
+                        secondary: '#64748B',
+                        accent: '#F97316',
+                        'accent-hover': '#EA580C',
+                        background: '#FFFFFF',
+                        foreground: '#0F172A',
+                        muted: '#F1F5F9',
+                        'muted-foreground': '#64748B',
+                        destructive: '#EF4444',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        /* Animação de entrada suave */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        /* Barra verde por baixo dos links */
+        .nav-link {
+            position: relative;
+            padding-bottom: 2px;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #1B4D3E;
+            /* Cor Primary */
+            transition: width 0.3s ease-in-out;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root">
+        <div class="min-h-screen bg-background">
+
+            <nav class="fixed top-0 left-0 right-0 z-50 glass-card border-b bg-[#ecfdf5]/95">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex items-center justify-between h-16 sm:h-20">
+                        <a href="#" class="flex items-center gap-2 cursor-pointer group">
+                            <div
+                                class="w-8 h-8 sm:w-10 sm:h-10 bg-primary rounded-lg flex items-center justify-center group-hover:bg-primary/90 transition-colors duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-leaf w-5 h-5 sm:w-6 sm:h-6 text-white">
+                                    <path
+                                        d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z">
+                                    </path>
+                                    <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path>
+                                </svg>
+                            </div>
+                            <span class="text-lg sm:text-xl font-bold text-primary">ElectroCap</span>
+                        </a>
+
+                        <div class="hidden md:flex items-center gap-8">
+                            <a href="#project"
+                                class="text-foreground hover:text-primary font-medium nav-link transition-colors">Project</a>
+                            <a href="#team"
+                                class="text-foreground hover:text-primary font-medium nav-link transition-colors">Team</a>
+                            <a href='{{ "posts/" | relURL }}'
+                                class="text-foreground hover:text-primary font-medium nav-link transition-colors">Blog</a>
+                        </div>
+
+                        <a href='{{ "proposta.pdf" | relURL }}' target="_blank"
+                            class="inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium h-10 px-4 py-2 bg-accent hover:bg-accent-hover text-white transition-all shadow-md hover:shadow-lg hover:scale-105">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-download w-4 h-4">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" x2="12" y1="15" y2="3"></line>
+                            </svg>
+                            <span class="hidden sm:inline">Download Proposal</span>
+                            <span class="sm:hidden">PDF</span>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+
+            <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+
+                <div class="absolute inset-0 z-0">
+                    <img src='{{ "images/hero-forest.jpg" | relURL }}' alt="Forest Background"
+                        class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-primary/60 mix-blend-multiply"></div>
+                </div>
+
+                <div class="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center pt-16">
+                    <div class="max-w-4xl mx-auto space-y-6 sm:space-y-8">
+                        <h1
+                            class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight animate-fade-in">
+                            Protecting Forests with<span class="block mt-2 text-white/90">Intelligent IoT</span>
+                        </h1>
+                        <p
+                            class="text-lg sm:text-xl md:text-2xl text-white/90 max-w-2xl mx-auto leading-relaxed animate-fade-in">
+                            Real-time early fire detection using LoRaWAN technology
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4 animate-fade-in">
+                            <a href="#project"
+                                class="px-8 py-4 bg-accent hover:bg-accent-hover text-white rounded-lg font-semibold transition-all shadow-md hover:shadow-lg hover:scale-105 w-full sm:w-auto">
+                                Explore Project
+                            </a>
+                            <a href="#team"
+                                class="px-8 py-4 bg-white/10 hover:bg-white/20 text-white border-2 border-white/30 rounded-lg font-semibold transition-all backdrop-blur-sm hover:scale-105 w-full sm:w-auto">
+                                Meet the Team
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-fade-in">
+                    <div
+                        class="w-6 h-10 border-2 border-white/70 rounded-full flex justify-center pt-2 animate-bounce cursor-pointer">
+                        <div class="w-1 h-2 bg-white rounded-full"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="project" class="py-20 sm:py-24 lg:py-32 bg-muted/30">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid md:grid-cols-2 gap-12 lg:gap-16 max-w-6xl mx-auto">
+
+                        <div class="space-y-6">
+                            <div class="inline-flex items-center gap-2 px-4 py-2 bg-destructive/10 rounded-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-flame w-5 h-5 text-destructive">
+                                    <path
+                                        d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z">
+                                    </path>
+                                </svg>
+                                <span class="text-sm font-semibold text-destructive">The Challenge</span>
+                            </div>
+                            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground">Devastating Wildfires
+                            </h2>
+                            <p class="text-lg text-muted-foreground leading-relaxed">Every year, wildfires destroy
+                                millions of hectares of forest, threatening biodiversity, human lives, and our climate.
+                                Traditional detection methods are slow and often too late.</p>
+
+                            <div class="space-y-4">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-2 h-2 rounded-full bg-destructive mt-2"></div>
+                                    <p class="text-muted-foreground">Late detection leads to uncontrollable fires</p>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <div class="w-2 h-2 rounded-full bg-destructive mt-2"></div>
+                                    <p class="text-muted-foreground">Limited coverage in remote forest areas</p>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <div class="w-2 h-2 rounded-full bg-destructive mt-2"></div>
+                                    <p class="text-muted-foreground">High operational costs for monitoring</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-6">
+                            <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-leaf w-5 h-5 text-primary">
+                                    <path
+                                        d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z">
+                                    </path>
+                                    <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path>
+                                </svg>
+                                <span class="text-sm font-semibold text-primary">Our Solution</span>
+                            </div>
+                            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground">Smart Detection
+                                Network</h2>
+                            <p class="text-lg text-muted-foreground leading-relaxed">ElectroCap deploys a network of
+                                intelligent IoT sensors across forests, providing real-time monitoring and early fire
+                                detection through advanced LoRaWAN technology.</p>
+
+                            <div class="grid gap-4">
+                                <div
+                                    class="glass-card p-5 rounded-xl transition-all hover:shadow-md flex items-start gap-4">
+                                    <div
+                                        class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="lucide lucide-thermometer w-6 h-6 text-primary">
+                                            <path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-foreground mb-1">Multi-Sensor Detection</h3>
+                                        <p class="text-sm text-muted-foreground">Temperature, humidity, and smoke
+                                            sensors working in harmony.</p>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="glass-card p-5 rounded-xl transition-all hover:shadow-md flex items-start gap-4">
+                                    <div
+                                        class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="lucide lucide-wifi w-6 h-6 text-primary">
+                                            <path d="M12 20h.01"></path>
+                                            <path d="M2 8.82a15 15 0 0 1 20 0"></path>
+                                            <path d="M5 12.859a10 10 0 0 1 14 0"></path>
+                                            <path d="M8.5 16.429a5 5 0 0 1 7 0"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-foreground mb-1">LoRaWAN Connectivity</h3>
+                                        <p class="text-sm text-muted-foreground">Long-range, low-power communication up
+                                            to 15km.</p>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="glass-card p-5 rounded-xl transition-all hover:shadow-md flex items-start gap-4">
+                                    <div
+                                        class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="lucide lucide-leaf w-6 h-6 text-primary">
+                                            <path
+                                                d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z">
+                                            </path>
+                                            <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-foreground mb-1">Sustainable Design</h3>
+                                        <p class="text-sm text-muted-foreground">Solar-powered units with minimal
+                                            environmental impact.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="py-20 sm:py-24 lg:py-32 bg-background">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+
+                    <div class="text-center max-w-3xl mx-auto mb-16">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-6">
+                            <span class="text-sm font-semibold text-primary">Technical Excellence</span>
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6">MVP Features</h2>
+                        <p class="text-lg text-muted-foreground leading-relaxed">Our minimum viable product demonstrates
+                            the core capabilities of the ElectroCap system</p>
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+
+                        <div
+                            class="glass-card p-8 rounded-2xl transition-all hover:shadow-lg hover:-translate-y-1 border border-gray-100">
+                            <div
+                                class="w-14 h-14 bg-primary rounded-xl flex items-center justify-center mb-6 text-white shadow-md">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-activity">
+                                    <path
+                                        d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2" />
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-foreground">Real-time Monitoring</h3>
+                            <p class="text-muted-foreground leading-relaxed">Continuous surveillance with instant alerts
+                                when anomalies are detected. Data visualization through our cloud dashboard.</p>
+                        </div>
+
+                        <div
+                            class="glass-card p-8 rounded-2xl transition-all hover:shadow-lg hover:-translate-y-1 border border-gray-100">
+                            <div
+                                class="w-14 h-14 bg-secondary rounded-xl flex items-center justify-center mb-6 text-white shadow-md">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-radio">
+                                    <path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9" />
+                                    <path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5" />
+                                    <circle cx="12" cy="12" r="2" />
+                                    <path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5" />
+                                    <path d="M19.1 4.9C23 8.8 23 15.1 19.1 19" />
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-foreground">Long-range Communication</h3>
+                            <p class="text-muted-foreground leading-relaxed">LoRa technology enables sensor networks
+                                spanning up to 15km, perfect for vast forest areas with minimal infrastructure.</p>
+                        </div>
+
+                        <div
+                            class="glass-card p-8 rounded-2xl transition-all hover:shadow-lg hover:-translate-y-1 border border-gray-100">
+                            <div
+                                class="w-14 h-14 bg-accent rounded-xl flex items-center justify-center mb-6 text-white shadow-md">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-battery-charging">
+                                    <path d="M15 7h1a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-2" />
+                                    <path d="M6 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h1" />
+                                    <path d="m11 7-3 5h4l-3 5" />
+                                    <line x1="22" x2="22" y1="11" y2="13" />
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-foreground">Low Power Consumption</h3>
+                            <p class="text-muted-foreground leading-relaxed">Solar-powered sensors with optimized energy
+                                usage ensure years of operation without maintenance in remote locations.</p>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <section id="team" class="py-20 sm:py-24 lg:py-32 bg-muted/30">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+
+                    <div class="text-center max-w-3xl mx-auto mb-16">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-users text-primary">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                            </svg>
+                            <span class="text-sm font-semibold text-primary">Our Team</span>
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6">Meet the ElectroCap
+                            Team</h2>
+                        <p class="text-lg text-muted-foreground leading-relaxed">A multidisciplinary team of engineering
+                            students from IST passionate about environmental technology.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
+
+                        <div class="text-center group">
+                            <div class="relative mb-6 inline-block">
+                                <div
+                                    class="w-32 h-32 bg-[#1B4D3E] rounded-full flex items-center justify-center mx-auto transition-transform duration-300 group-hover:scale-110 shadow-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="text-white">
+                                        <rect width="16" height="16" x="4" y="4" rx="2" />
+                                        <rect width="6" height="6" x="9" y="9" rx="1" />
+                                        <path d="M15 2v2" />
+                                        <path d="M15 20v2" />
+                                        <path d="M2 15h2" />
+                                        <path d="M2 9h2" />
+                                        <path d="M20 15h2" />
+                                        <path d="M20 9h2" />
+                                        <path d="M9 2v2" />
+                                        <path d="M9 20v2" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-bold text-foreground mb-1">Ana Silva</h3>
+                            <p class="text-muted-foreground font-medium">Hardware Engineer</p>
+                        </div>
+
+                        <div class="text-center group">
+                            <div class="relative mb-6 inline-block">
+                                <div
+                                    class="w-32 h-32 bg-[#64748B] rounded-full flex items-center justify-center mx-auto transition-transform duration-300 group-hover:scale-110 shadow-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="text-white">
+                                        <polyline points="16 18 22 12 16 6" />
+                                        <polyline points="8 6 2 12 8 18" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-bold text-foreground mb-1">João Santos</h3>
+                            <p class="text-muted-foreground font-medium">Software Developer</p>
+                        </div>
+
+                        <div class="text-center group">
+                            <div class="relative mb-6 inline-block">
+                                <div
+                                    class="w-32 h-32 bg-[#F97316] rounded-full flex items-center justify-center mx-auto transition-transform duration-300 group-hover:scale-110 shadow-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="text-white">
+                                        <path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9" />
+                                        <path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5" />
+                                        <circle cx="12" cy="12" r="2" />
+                                        <path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5" />
+                                        <path d="M19.1 4.9C23 8.8 23 15.1 19.1 19" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-bold text-foreground mb-1">Maria Costa</h3>
+                            <p class="text-muted-foreground font-medium">Communications Specialist</p>
+                        </div>
+
+                        <div class="text-center group">
+                            <div class="relative mb-6 inline-block">
+                                <div
+                                    class="w-32 h-32 bg-[#2d8a6e] rounded-full flex items-center justify-center mx-auto transition-transform duration-300 group-hover:scale-110 shadow-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="text-white">
+                                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                                        <circle cx="9" cy="7" r="4" />
+                                        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-bold text-foreground mb-1">Pedro Oliveira</h3>
+                            <p class="text-muted-foreground font-medium">Project Lead</p>
+                        </div>
+
+                        <div class="text-center group">
+                            <div class="relative mb-6 inline-block">
+                                <div
+                                    class="w-32 h-32 bg-[#6366f1] rounded-full flex items-center justify-center mx-auto transition-transform duration-300 group-hover:scale-110 shadow-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="text-white">
+                                        <path
+                                            d="M17.5 19c0-1.7-1.3-3-3-3h-1.1c-.1-2.9-2.5-5.3-5.4-5.3-2.6 0-4.8 1.9-5.3 4.4C1.3 15.7 0 17.5 0 19.5c0 2.5 2 4.5 4.5 4.5h13c2.5 0 4.5-2 4.5-4.5 0-2.3-1.7-4.2-4-4.5z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-bold text-foreground mb-1">Miguel Sousa</h3>
+                            <p class="text-muted-foreground font-medium">Cloud & Backend</p>
+                        </div>
+
+                        <div class="text-center group">
+                            <div class="relative mb-6 inline-block">
+                                <div
+                                    class="w-32 h-32 bg-[#eab308] rounded-full flex items-center justify-center mx-auto transition-transform duration-300 group-hover:scale-110 shadow-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="text-white">
+                                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-bold text-foreground mb-1">Sofia Martins</h3>
+                            <p class="text-muted-foreground font-medium">Power Management</p>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <section id="blog" class="py-20 sm:py-24 lg:py-32 bg-background relative overflow-hidden">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+
+                    <div class="text-center max-w-3xl mx-auto mb-12">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-scroll-text text-primary">
+                                <path
+                                    d="M8 21h12a2 2 0 0 0 2-2v-2a10 10 0 0 0-10-10A10 10 0 0 0 2 17v2a2 2 0 0 0 2 2h6" />
+                                <path d="M19 17v4" />
+                            </svg>
+                            <span class="text-sm font-semibold text-primary">Project Log</span>
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6">Latest Activities
+                        </h2>
+                        <p class="text-lg text-muted-foreground leading-relaxed">Follow our journey from concept to
+                            deployment.</p>
+                    </div>
+
+                    <div class="relative max-w-7xl mx-auto group">
+
+                        <button onclick="scrollBlog('left')"
+                            class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-12 h-12 bg-white rounded-full shadow-lg border border-gray-100 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all opacity-0 group-hover:opacity-100 focus:opacity-100 md:-translate-x-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="m15 18-6-6 6-6" />
+                            </svg>
+                        </button>
+
+                        <button onclick="scrollBlog('right')"
+                            class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-12 h-12 bg-white rounded-full shadow-lg border border-gray-100 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all opacity-0 group-hover:opacity-100 focus:opacity-100 md:translate-x-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="m9 18 6-6-6-6" />
+                            </svg>
+                        </button>
+
+                        <div id="blog-container"
+                            class="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide scroll-smooth"
+                            style="scrollbar-width: none; -ms-overflow-style: none;">
+
+                            {{ range $index, $element := first 6 (where .Site.RegularPages "Section" "posts") }}
+                            <article
+                                class="min-w-[85%] md:min-w-[calc(33.333%-16px)] snap-center bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 group/card">
+
+                                <div class="h-48 flex items-center justify-center 
+                                    {{ if eq (mod $index 3) 0 }} bg-[#1B4D3E] {{ end }}
+                                    {{ if eq (mod $index 3) 1 }} bg-[#64748B] {{ end }}
+                                    {{ if eq (mod $index 3) 2 }} bg-[#F97316] {{ end }}">
+
+                                    {{ if eq (mod $index 3) 0 }}
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="text-white group-hover/card:scale-110 transition-transform">
+                                        <path
+                                            d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
+                                        <path
+                                            d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
+                                        <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+                                        <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+                                    </svg>
+                                    {{ end }}
+                                    {{ if eq (mod $index 3) 1 }}
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="text-white group-hover/card:scale-110 transition-transform">
+                                        <rect width="16" height="16" x="4" y="4" rx="2" />
+                                        <rect width="6" height="6" x="9" y="9" rx="1" />
+                                        <path d="M15 2v2" />
+                                        <path d="M15 20v2" />
+                                        <path d="M2 15h2" />
+                                        <path d="M2 9h2" />
+                                        <path d="M20 15h2" />
+                                        <path d="M20 9h2" />
+                                        <path d="M9 2v2" />
+                                        <path d="M9 20v2" />
+                                    </svg>
+                                    {{ end }}
+                                    {{ if eq (mod $index 3) 2 }}
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="text-white group-hover/card:scale-110 transition-transform">
+                                        <path
+                                            d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+                                        <circle cx="12" cy="10" r="3" />
+                                    </svg>
+                                    {{ end }}
+                                </div>
+
+                                <div class="p-8">
+                                    <div class="flex items-center gap-2 text-sm text-muted-foreground mb-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <rect width="18" height="18" x="3" y="4" rx="2" />
+                                            <path d="M3 10h18" />
+                                            <path d="M8 2v4" />
+                                            <path d="M16 2v4" />
+                                        </svg>
+                                        <time>{{ .Date.Format "January 2, 2006" }}</time>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-foreground mb-3 line-clamp-1">{{ .Title }}</h3>
+                                    <p class="text-muted-foreground leading-relaxed mb-6 line-clamp-3">
+                                        {{ .Summary | default "Click to read more details about this activity." }}
+                                    </p>
+                                    <a href="{{ .Permalink }}"
+                                        class="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all">
+                                        Read more
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M5 12h14" />
+                                            <path d="m12 5 7 7-7 7" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </article>
+                            {{ end }}
+
+                            {{ if eq (len (where .Site.RegularPages "Section" "posts")) 0 }}
+                            <div class="w-full text-center py-10 text-muted-foreground">
+                                <p>Ainda não há posts no blog. Cria um ficheiro em <code>content/posts/</code></p>
+                            </div>
+                            {{ end }}
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <script>
+                function scrollBlog(direction) {
+                    const container = document.getElementById('blog-container');
+                    const scrollAmount = container.clientWidth / 3; // Scrolla o equivalente a 1 cartão
+
+                    if (direction === 'left') {
+                        container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                    } else {
+                        container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                    }
+                }
+            </script>
+
+            <footer class="bg-[#1B4D3E] text-white py-12 border-t border-white/10">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+
+                    <div class="grid md:grid-cols-3 gap-8 lg:gap-12 mb-12">
+
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-2">
+                                <div class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="text-white">
+                                        <path
+                                            d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+                                        <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" />
+                                    </svg>
+                                </div>
+                                <span class="text-xl font-bold">ElectroCap</span>
+                            </div>
+                            <p class="text-white/80 leading-relaxed text-sm max-w-xs">
+                                Protecting forests with intelligent IoT technology. A project by engineering students at
+                                IST.
+                            </p>
+                        </div>
+
+                        <div>
+                            <h3 class="font-bold text-lg mb-4 opacity-90 text-[#ecfdf5]">Quick Links</h3>
+                            <ul class="space-y-3 text-sm text-white/70">
+                                <li><a href="#project"
+                                        class="hover:text-white transition-colors flex items-center gap-2">About
+                                        Project</a></li>
+                                <li><a href="#team"
+                                        class="hover:text-white transition-colors flex items-center gap-2">Our Team</a>
+                                </li>
+                                <li><a href="#blog"
+                                        class="text-foreground hover:text-primary font-medium nav-link transition-colors">Blog</a>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 class="font-bold text-lg mb-4 opacity-90 text-[#ecfdf5]">Get in Touch</h3>
+                            <div class="space-y-4">
+                                <a href="mailto:contact@electrocap.com"
+                                    class="flex items-center gap-3 text-sm text-white/70 hover:text-white transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <rect width="20" height="16" x="2" y="4" rx="2" />
+                                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                                    </svg>
+                                    contact@electrocap.com
+                                </a>
+
+                                <div class="flex gap-3 pt-2">
+                                    <a href="#"
+                                        class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-all hover:scale-105">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path
+                                                d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+                                            <path d="M9 18c-4.51 2-5-2-7-2" />
+                                        </svg>
+                                    </a>
+                                    <a href="#"
+                                        class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-all hover:scale-105">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path
+                                                d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                                            <rect width="4" height="12" x="2" y="9" />
+                                            <circle cx="4" cy="4" r="2" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs sm:text-sm text-white/60">
+                        <p>© 2024 ElectroCap - Instituto Superior Técnico. All rights reserved.</p>
+
+                        <div class="flex items-center gap-2 px-3 py-1 bg-white/5 rounded-full border border-white/5">
+                            <span>Page views:</span>
+                            <span class="text-white font-semibold font-mono">1,200</span>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+    </div>
+</body>
+
+</html>

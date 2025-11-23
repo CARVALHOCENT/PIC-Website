@@ -1,0 +1,20 @@
+baseURL = 'https://web.tecnico.ulisboa.pt/istXXXXX/electrocap/'
+languageCode = 'pt-pt'
+title = 'ElectroCap'
+theme = 'PaperMod'
+
+[params]
+  defaultTheme = "light"
+  description = "Deteção de Incêndios Florestais - Projeto LEEC"
+
+[menu]
+  [[menu.main]]
+    identifier = "pdf"
+    name = "📄 Proposta (PDF)"
+    url = "/uploads/proposta_electrocap.pdf"
+    weight = 10
+  [[menu.main]]
+    identifier = "blog"
+    name = "Diário de Bordo"
+    url = "/posts/"
+    weight = 20

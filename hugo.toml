@@ -1,4 +1,4 @@
-baseURL = 'https://web.tecnico.ulisboa.pt/istXXXXX/electrocap/'
+baseURL = "http://localhost:1313/ist1109562/electrocap/"
 languageCode = 'pt-pt'
 title = 'ElectroCap'
 theme = 'PaperMod'
@@ -13,8 +13,15 @@ theme = 'PaperMod'
     name = "📄 Proposta (PDF)"
     url = "/uploads/proposta_electrocap.pdf"
     weight = 10
+
   [[menu.main]]
     identifier = "blog"
     name = "Diário de Bordo"
     url = "/posts/"
     weight = 20
+
+[[menu.main]]
+    identifier = "calendario"
+    name = "📅 Calendário"
+    url = "/calendar/"
+    weight = 30

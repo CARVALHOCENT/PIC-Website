@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendário do Projeto - ElectroCap</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: { 
+                    colors: { 
+                        primary: '#1B4D3E',
+                        accent: '#F97316',
+                        'accent-hover': '#EA580C',
+                        background: '#F0F2F0',
+                        surface: '#FFFFFF',
+                        'muted-foreground': '#64748B'
+                    } 
+                }
+            }
+        }
+    </script>
+    <style>
+        .calendar-grid {
+            background-color: rgba(27, 77, 62, 0.1); 
+        }
+        .calendar-cell {
+            position: relative;
+        }
+    </style>
+</head>
+<body class="bg-background min-h-screen font-sans text-slate-800">
+
+    <nav class="bg-white/80 backdrop-blur-sm border-b border-primary/10 sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-6 flex justify-between items-center h-20">
+            <a href="http://localhost:1313/ist1109562/electrocap" class="font-bold text-lg flex items-center gap-2 text-primary hover:opacity-70 transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                BACK
+            </a>
+            
+            <div class="hidden md:flex gap-6 text-[10px] font-black uppercase tracking-[0.15em] text-primary/60">
+                <span class="flex items-center gap-2"><span class="w-3 h-3 bg-accent rounded-sm shadow-sm"></span> Meeting</span>
+                <span class="flex items-center gap-2"><span class="w-3 h-3 bg-primary rounded-sm shadow-sm"></span> Deadline</span>
+                <span class="flex items-center gap-2"><span class="w-3 h-3 bg-yellow-500 rounded-sm shadow-sm"></span> Seminar</span>
+                <span class="flex items-center gap-2"><span class="w-3 h-3 bg-gray-500 rounded-sm shadow-sm"></span> Others</span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-12 max-w-6xl">
+        <header class="mb-16 text-center">
+            <div class="inline-flex items-center gap-2 mb-4">
+                <span class="w-8 h-[2px] bg-accent"></span>
+                <span class="text-xs font-black text-primary uppercase tracking-[0.2em]">JAN-JUN</span>
+            </div>
+            <h1 class="text-5xl md:text-6xl font-black text-primary uppercase tracking-tighter">Timeline</h1>
+            <p class="text-muted-foreground mt-4 text-lg">Follow the development of the ElectroCap project.</p>
+        </header>
+
+        {{ $months := slice 
+            (dict "name" "January" "monthNum" "01" "days" 31 "offset" 4) 
+            (dict "name" "February" "monthNum" "02" "days" 28 "offset" 0) 
+            (dict "name" "March" "monthNum" "03" "days" 31 "offset" 0)
+            (dict "name" "April" "monthNum" "04" "days" 30 "offset" 3)
+            (dict "name" "May" "monthNum" "05" "days" 31 "offset" 5)
+            (dict "name" "June" "monthNum" "06" "days" 30 "offset" 1)
+        }}
+
+        {{ $allEvents := sort (where $.Site.RegularPages "Section" "in" (slice "posts" "calendario")) "Date" "asc" }}
+
+        <div class="space-y-20">
+            {{ range $months }}
+            <section class="animate-fade-in">
+                
+                <div class="flex items-center gap-6 mb-8">
+                    <h2 class="text-3xl md:text-4xl font-black text-primary uppercase tracking-tighter leading-none">
+                        {{ .name }}
+                    </h2>
+                    <div class="h-[2px] bg-primary/10 flex-grow"></div>
+                </div>
+                
+                <div class="grid grid-cols-7 gap-1 mb-2 text-center text-[10px] font-black text-primary/40 uppercase tracking-widest">
+                    <div>SUN</div><div>MON</div><div>TUE</div><div>WED</div><div>THU</div><div>FRI</div><div>SAT</div>
+                </div>
+
+                <div class="grid grid-cols-7 calendar-grid gap-[1px] border border-primary/10 shadow-2xl rounded-3xl overflow-hidden bg-white/50">
+                    
+                    {{ if gt .offset 0 }}{{ range (seq .offset) }}
+                    <div class="bg-stone-50/40 min-h-[100px] md:min-h-[140px]"></div>
+                    {{ end }}{{ end }}
+
+                    {{ $monthNum := .monthNum }}
+                    {{ range (seq .days) }}
+                        {{ $day := printf "%02d" . }}
+                        {{ $currentDateStr := printf "2026-%s-%s" $monthNum $day }}
+                        
+                        <div class="bg-white min-h-[100px] md:min-h-[140px] p-2 calendar-cell group hover:bg-stone-50/50 transition-colors z-0 hover:z-20">
+                            <span class="text-sm font-bold text-stone-300 group-hover:text-primary transition-colors pl-1">{{ . }}</span>
+                            
+                            <div class="mt-1 flex flex-col gap-[2px]">
+                                
+                                {{ range $allEvents }}
+                                    {{ $startStr := .Date.Format "2006-01-02" }}
+                                    {{ $endStr := $startStr }}
+                                    {{ if .Params.end_date }}
+                                        {{ $endStr = (time.AsTime .Params.end_date).Format "2006-01-02" }}
+                                    {{ end }}
+                                    {{ $isLongEvent := ne $startStr $endStr }}
+
+                                    {{ if and (ge $currentDateStr $startStr) (le $currentDateStr $endStr) }}
+                                        {{ if $isLongEvent }}
+                                            
+                                            {{ $isStart := eq $currentDateStr $startStr }}
+                                            {{ $isEnd := eq $currentDateStr $endStr }}
+
+                                            {{ $bgClass := "bg-stone-200 text-stone-700 hover:bg-stone-300" }} 
+                                            {{ if eq .Params.category "meeting" }}
+                                                {{ $bgClass = "bg-accent text-white hover:bg-accent-hover shadow-sm" }}
+                                            {{ else if eq .Params.category "deadline" }}
+                                                {{ $bgClass = "bg-primary text-white hover:bg-primary/90 shadow-sm" }}
+                                            {{ else if eq .Params.category "seminar" }}
+                                                {{ $bgClass = "bg-yellow-500 text-white hover:bg-yellow-600 shadow-sm" }}
+                                            {{ end }}
+
+                                            {{ $shapeClass := "" }}
+                                            {{ $textClass := "" }}
+
+                                            {{ if $isStart }}
+                                                {{ $shapeClass = "rounded-l-md -mr-4 pr-4 relative z-10" }}
+                                                {{ $textClass = "font-black opacity-100" }}
+                                            {{ else if $isEnd }}
+                                                {{ $shapeClass = "rounded-r-md -ml-4 pl-4 relative z-10" }}
+                                                {{ $textClass = "font-medium text-white/60" }}
+                                            {{ else }}
+                                                {{ $shapeClass = "rounded-none -mx-4 px-4 relative z-10" }}
+                                                {{ $textClass = "font-medium text-white/60" }}
+                                            {{ end }}
+
+                                            <a href="{{ .RelPermalink }}" class="block py-1 px-2 mb-[1px] text-[9px] leading-tight {{ $bgClass }} {{ $shapeClass }} transition-colors uppercase tracking-tight overflow-hidden">
+                                                <span class="truncate block {{ $textClass }}">{{ .Title }}</span>
+                                            </a>
+                                            
+                                        {{ end }}
+                                    {{ end }}
+                                {{ end }}
+
+                                {{ range $allEvents }}
+                                    {{ $startStr := .Date.Format "2006-01-02" }}
+                                    {{ $endStr := $startStr }}
+                                    {{ if .Params.end_date }}
+                                        {{ $endStr = (time.AsTime .Params.end_date).Format "2006-01-02" }}
+                                    {{ end }}
+                                    {{ $isLongEvent := ne $startStr $endStr }}
+
+                                    {{ if and (ge $currentDateStr $startStr) (le $currentDateStr $endStr) }}
+                                        {{ if not $isLongEvent }}
+                                            
+                                            {{ $bgClass := "bg-stone-200 text-stone-700 hover:bg-stone-300" }} 
+                                            {{ if eq .Params.category "meeting" }}
+                                                {{ $bgClass = "bg-accent text-white hover:bg-accent-hover shadow-sm" }}
+                                            {{ else if eq .Params.category "deadline" }}
+                                                {{ $bgClass = "bg-primary text-white hover:bg-primary/90 shadow-sm" }}
+                                            {{ else if eq .Params.category "seminar" }}
+                                                {{ $bgClass = "bg-yellow-500 text-white hover:bg-yellow-600 shadow-sm" }}
+                                            {{ end }}
+
+                                            <a href="{{ .RelPermalink }}" class="block py-1 px-2 mb-[1px] text-[9px] font-black leading-tight {{ $bgClass }} rounded-md mx-0 opacity-100 transition-colors uppercase tracking-tight relative z-10">
+                                                <span class="truncate block">{{ .Title }}</span>
+                                            </a>
+                                            
+                                        {{ end }}
+                                    {{ end }}
+                                {{ end }}
+
+                            </div>
+                        </div>
+                    {{ end }}
+                </div>
+            </section>
+            {{ end }}
+        </div>
+    </main>
+
+    <footer class="bg-primary text-white py-12 mt-20">
+        <div class="container mx-auto px-6 text-center">
+            <span class="text-xl font-black tracking-tighter uppercase block mb-4">ElectroCap</span>
+            <p class="text-white/40 text-xs tracking-widest uppercase">© 2026 Instituto Superior Técnico. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

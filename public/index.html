@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+	<meta name="generator" content="Hugo 0.157.0"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@800;900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElectroCap - Forest Fire Detection</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1B4D3E', 
+                secondary: '#64748B',
+                accent: '#F97316',
+                        'accent-hover': '#EA580C',
+                        background: '#F0F2F0', 
+                        surface: '#E2E8E2',    
+                        foreground: '#1C211C', 
+                        muted: '#F1F5F9',
+                        'muted-foreground': '#64748B',
+                        destructive: '#EF4444',
+                    }
+                }
+            }
+        }
+    </script>
+
+
+
+
+    <style>
+        .glass-card {
+            background: #F0F2F0;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        .nav-link {
+            position: relative;
+            padding-bottom: 2px;
+        }
+        .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: rgb(255, 211, 117);  
+    transition: width 0.3s ease-in-out;
+}
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body class="bg-background font-sans text-foreground">
+    <header class="fixed top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-sm">
+        <nav class="container mx-auto px-6 py-6 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+
+                <span class="hidden md:flex items-center gap-8 text-2xl text-primary font-bold">ElectroCap</span>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-8 text-primary font-bold">
+                <a href="#about" class="nav-link hover:opacity-80 transition-opacity">About</a>
+                <a href="#team" class="nav-link hover:opacity-80 transition-opacity">Team</a>
+                <a href="#partners" class="nav-link hover:opacity-80 transition-opacity">Partners</a>
+                <a href="http://localhost:1313/ist1109562/electrocap/posts" class="nav-link">Blog</a>
+                <a href="http://localhost:1313/ist1109562/electrocap/calendario" class="nav-link">Timeline</a>
+                <a href="#interviews" class="nav-link hover:opacity-80 transition-opacity">Interviews</a>
+            </div>
+    
+            <a href="#" class="px-6 py-3 bg-accent hover:bg-accent-hover text-primary rounded-lg font-bold transition-all shadow-xl active:scale-95 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                Download Proposal
+            </a>
+        </nav>
+    </header>
+
+    <section class="relative h-screen min-h-[600px] flex items-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="images/capa2.png" alt="Forest Fire" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/20 to-transparent"></div>
+        </div>
+
+        <div class="container mx-auto px-6 md:px-12 relative z-10">
+            <div class="max-w-3xl animate-fade-in">
+                
+                <div class="flex items-center gap-2 mb-6">
+                    <span class="px-3 py-1 bg-primary/30 border border-primary/50 rounded-md text-white text-xs font-bold tracking-widest uppercase">
+                        Equipa 2 
+                    </span>
+                </div>
+
+                <h1 class="text-white mb-6">
+                    <span class="block text-5xl md:text-7xl font-black leading-tight uppercase">
+                        Forest<br>
+                        <span class="text-white/80">Fire Detection</span>
+                    </span>
+                </h1>
+
+                <p class="text-white/70 text-lg md:text-xl max-w-xl mb-10 leading-relaxed">
+                    Detecting forest fires before they spread
+                </p>
+
+                <div class="flex flex-wrap gap-4">
+                    <a href="#about" class="px-8 py-4 bg-primary/90 hover:bg-primary text-white rounded-full font-bold text-lg transition-all hover:scale-105 active:scale-95 shadow-2xl flex items-center gap-2">
+                        Learn More
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="about" class="py-20 sm:py-24 lg:py-32 bg-background">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 max-w-7xl mx-auto">
+                
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-stone-100 hover:shadow-md transition-all flex flex-col">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-orange-700/10 rounded-full w-fit mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-800"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>
+                        <span class="text-xs font-bold text-orange-800 uppercase tracking-wider">Mission & Impact</span>
+                    </div>
+                    <h2 class="text-2xl font-bold text-primary mb-4">Our Mission</h2>
+                    <p class="text-stone-600 leading-relaxed text-sm lg:text-base">
+                        Protecting forest biodiversity by equipping firefighters with real-time data. Our dashboard enhances situational awareness, reducing response times and environmental damage.
+                    </p>
+                </div>
+    
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-stone-100 hover:shadow-md transition-all flex flex-col">
+                    <div class="inline-flex items-center gap-3 px-4 py-2 bg-primary/10 rounded-full w-fit mb-6 shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary shrink-0">
+                            <path d="M5 22l4-12M13 22l-4-12M9 10V4"/>
+                            <circle cx="9" cy="3" r="1" fill="currentColor"/>
+                            <path d="M13 4.5c1.2 0.8 2 2.2 2 3.5s-0.8 2.7-2 3.5"/>
+                            <path d="M16 2c2.5 1.5 4 4 4 7s-1.5 5.5-4 7"/>
+                        </svg>
+                        
+                        <span class="text-xs font-bold text-primary uppercase tracking-wider whitespace-nowrap">Hybrid Technology</span>
+                    </div>
+                
+                    <h2 class="text-2xl font-bold text-primary mb-4">Smart Solution</h2>
+                    
+                    <p class="text-stone-600 leading-relaxed text-sm lg:text-base">
+                        We use AI-powered visual intelligence combined with a resilient sensor mesh. Integrating YOLO algorithms and LoRa/Mesh connectivity ensures detection even in remote areas.
+                    </p>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-stone-100 hover:shadow-md transition-all flex flex-col">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-[#8B5E3C]/10 rounded-full w-fit mb-6 border border-[#8B5E3C]/20">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#8B5E3C]"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        <span class="text-xs font-bold text-[#8B5E3C] uppercase tracking-wider">Reliability & Validation</span>
+                    </div>
+                    <h2 class="text-2xl font-bold text-primary mb-4">Our Validation</h2>
+                    <p class="text-stone-600 leading-relaxed text-sm lg:text-base">
+                        Tested in night visibility, rain, and fog. With high precision and low latency, our system ensures reliability and minimizes false alarms in critical situations.
+                    </p>
+                </div>
+    
+            </div>
+        </div>
+    </section>
+
+            <section id="team" class="py-20 sm:py-24 lg:py-32 bg-muted/30">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            
+                    <div class="text-center max-w-3xl mx-auto mb-16">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            <span class="text-sm font-semibold text-primary">Our Team</span>
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6">Meet the ElectroCap Team</h2>
+                                            </div>
+            
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+            
+                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all flex flex-col">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="w-24 h-24 shrink-0 rounded-lg overflow-hidden bg-gray-50 border border-gray-100">
+                                    <img src="http://localhost:1313/ist1109562/electrocap/images/carolina.png"  alt="Foto da Carolina" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-foreground uppercase leading-tight">CAROLINA<br>RODRIGUES</h3>
+                                    <p class="text-primary font-bold text-sm mt-1">LEEC IST ID 109562</p>
+                                </div>
+                            </div>
+                            <p class="text-muted-foreground text-xs font-medium mb-4">3rd Year Electrical and Computer Engineering</p>
+                            <div class="flex gap-2 mt-auto">
+                                <a href="mailto:carolinarodrigues@hotmail.com" class="flex-1 inline-flex items-center justify-center gap-2 py-2 border-2 border-primary text-primary rounded-full hover:bg-primary hover:text-white transition-all text-xs font-bold">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                                    Email
+                                </a>
+                                <a href="https://www.linkedin.com/in/carolina-rodrigues-4b5a45281" target="_blank" class="flex-1 inline-flex items-center justify-center gap-2 py-2 border-2 border-primary text-primary rounded-full hover:bg-primary hover:text-white transition-all text-xs font-bold">
+                                    <svg xmlns="" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                                    LinkedIn
+                                </a>
+                            </div>
+                        </div>
+            
+                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all flex flex-col">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="w-24 h-24 shrink-0 rounded-lg overflow-hidden bg-gray-50 border border-gray-100">
+                                    <img src="http://localhost:1313/ist1109562/electrocap/images/barbara.png"  alt="Bárbara Trigueirão" class="w-full h-full object-cover">
+
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-foreground uppercase leading-tight">BÁRBARA<br>TRIGUEIRÃO</h3>
+                                    <p class="text-primary font-bold text-sm mt-1">LEEC IST ID 109590</p>
+                                </div>
+                            </div>
+                            <p class="text-muted-foreground text-xs font-medium mb-4">3rd Year Electrical and Computer Engineering</p>
+                            <div class="flex gap-2 mt-auto">
+                                <a href="mailto:barbara.trigueirao@tecnico.ulisboa.pt" class="flex-1 inline-flex items-center justify-center gap-2 py-2 border-2 border-primary text-primary rounded-full hover:bg-primary hover:text-white transition-all text-xs font-bold">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                                    Email
+                                </a>
+                                <a href="https://www.linkedin.com/in/bárbara-trigueirão-6b8001325" target="_blank" class="flex-1 inline-flex items-center justify-center gap-2 py-2 border-2 border-primary text-primary rounded-full hover:bg-primary hover:text-white transition-all text-xs font-bold">
+                                    <svg xmlns="" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                                    LinkedIn
+                                </a>
+                            </div>
+                        </div>
+            
+                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all flex flex-col">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="w-24 h-24 shrink-0 rounded-lg overflow-hidden bg-gray-50 border border-gray-100">
+                                    <img src="http://localhost:1313/ist1109562/electrocap/images/marco.png"  alt="Marco Mendonça" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-foreground uppercase leading-tight">MARCO<br>MENDONÇA</h3>
+                                    <p class="text-primary font-bold text-sm mt-1">LEEC IST ID 109977</p>
+                                </div>
+                            </div>
+                            <p class="text-muted-foreground text-xs font-medium mb-4">3rd Year Electrical and Computer Engineering</p>
+                            <div class="flex gap-2 mt-auto">
+                                <a href="mailto:marco.mendonca@tecnico.ulisboa.pt" class="flex-1 inline-flex items-center justify-center gap-2 py-2 border-2 border-primary text-primary rounded-full hover:bg-primary hover:text-white transition-all text-xs font-bold">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                                    Email
+                                </a>
+                                <a href="#" target="_blank" class="flex-1 inline-flex items-center justify-center gap-2 py-2 border-2 border-primary text-primary rounded-full hover:bg-primary hover:text-white transition-all text-xs font-bold">
+                                    <svg xmlns="" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                                    LinkedIn
+                                </a>
+                            </div>
+                        </div>
+            
+                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all flex flex-col">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="w-24 h-24 shrink-0 rounded-lg overflow-hidden bg-gray-50 border border-gray-100">
+                                    <img src="http://localhost:1313/ist1109562/electrocap/images/goncalo.png"  alt="Gonçalo Caetano" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-foreground uppercase leading-tight">GONÇALO<br>CAETANO</h3>
+                                    <p class="text-primary font-bold text-sm mt-1">LEEC IST ID 109925</p>
+                                </div>
+                            </div>
+                            <p class="text-muted-foreground text-xs font-medium mb-4">3rd Year Electrical and Computer Engineering</p>
+                            <div class="flex gap-2 mt-auto">
+                                <a href="mailto:goncalomiracaetano@tecnico.ulisboa.pt" class="flex-1 inline-flex items-center justify-center gap-2 py-2 border-2 border-primary text-primary rounded-full hover:bg-primary hover:text-white transition-all text-xs font-bold">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                                    Email
+                                </a>
+                                <a href="https://www.linkedin.com/in/gonçalo-caetano-5127343b3" target="_blank" class="flex-1 inline-flex items-center justify-center gap-2 py-2 border-2 border-primary text-primary rounded-full hover:bg-primary hover:text-white transition-all text-xs font-bold">
+                                    <svg xmlns="" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                                    LinkedIn
+                                </a>
+                            </div>
+                        </div>
+            
+                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all flex flex-col">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="w-24 h-24 shrink-0 rounded-lg overflow-hidden bg-gray-50 border border-gray-100">
+                                    <img src="http://localhost:1313/ist1109562/electrocap/images/diogo.png" alt="Diogo Vicente" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-foreground uppercase leading-tight">DIOGO<br>VICENTE</h3>
+                                    <p class="text-primary font-bold text-sm mt-1">LEEC IST ID 110736</p>
+                                </div>
+                            </div>
+                            <p class="text-muted-foreground text-xs font-medium mb-4">3rd Year Electrical and Computer Engineering</p>
+                            <div class="flex gap-2 mt-auto">
+                                <a href="mailto:diogo.alves.vicente@tecnico.ulisboa.pt" class="flex-1 inline-flex items-center justify-center gap-2 py-2 border-2 border-primary text-primary rounded-full hover:bg-primary hover:text-white transition-all text-xs font-bold">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                                    Email
+                                </a>
+                                <a href="https://www.linkedin.com/in/diogo-vicente-b1b4073b4" target="_blank" class="flex-1 inline-flex items-center justify-center gap-2 py-2 border-2 border-primary text-primary rounded-full hover:bg-primary hover:text-white transition-all text-xs font-bold">
+                                    <svg xmlns="" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                                    LinkedIn
+                                </a>
+                            </div>
+                        </div>
+            
+                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all flex flex-col">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="w-24 h-24 shrink-0 rounded-lg overflow-hidden bg-gray-50 border border-gray-100">
+                                    <img src="http://localhost:1313/ist1109562/electrocap/images/salvador.png" alt="Salvador Carvalho" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-foreground uppercase leading-tight">SALVADOR<br>CARVALHO</h3>
+                                    <p class="text-primary font-bold text-sm mt-1">LEEC IST ID 109394</p>
+                                </div>
+                            </div>
+                            <p class="text-muted-foreground text-xs font-medium mb-4">3rd Year Electrical and Computer Engineering</p>
+                            <div class="flex gap-2 mt-auto">
+                                <a href="mailto:salvadorcarvalho@tecnico.ulisboa.pt" class="flex-1 inline-flex items-center justify-center gap-2 py-2 border-2 border-primary text-primary rounded-full hover:bg-primary hover:text-white transition-all text-xs font-bold">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                                    Email
+                                </a>
+                                <a href="https://www.linkedin.com/in/salvadordesousacarvalho/" target="_blank" class="flex-1 inline-flex items-center justify-center gap-2 py-2 border-2 border-primary text-primary rounded-full hover:bg-primary hover:text-white transition-all text-xs font-bold">
+                                    <svg xmlns="" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                                    LinkedIn
+                                </a>
+                            </div>
+                        </div>
+            
+                    </div>
+                </div>
+            </section>
+
+            <section id="partners" class="py-20 bg-muted/20 border-t border-muted">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-6">
+                            <span class="text-sm font-semibold text-primary">Collaborations</span>
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl font-bold text-foreground mb-4">Our Partners</h2>
+                        </div>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+                        
+                        <div class="flex flex-col items-center text-center group">
+                            <div class="w-24 h-24 mb-6 mx-auto transition-transform duration-300 group-hover:scale-110">
+                                <img src="images/IST.png" alt=" Logo IST" class="max-w-full max-h-full  object-cover">
+                              </div>
+                            <h3 class="font-bold text-xl text-foreground mb-2">Instituto Superior Técnico</h3>
+                            <p class="text-sm text-muted-foreground leading-relaxed">Portugal’s leading engineering school, renowned for its cutting-edge
+                                research and innovation in science and technology. IST provides a robust academic environment, equipping students
+                                 with the knowledge and expertise to tackle real-world challenges in various engineering disciplines.</p>
+                        </div>
+                        
+                        <div class="flex flex-col items-center text-center group">
+                            <div class="w-24 h-24 mb-6 mx-auto transition-transform duration-300 group-hover:scale-110">
+                                <img src="http://localhost:1313/ist1109562/electrocap/images/protecao_civil.png"  alt="Civil Protection Logo" class="w-full h-full object-contain">
+                            </div>
+                            <h3 class="font-bold text-xl text-foreground mb-2">Civil Protection</h3>
+                            <p class="text-sm text-muted-foreground leading-relaxed">Civil Protection is responsible for coordinating actions to prevent, prepare for, and respond to emergencies and disasters. 
+                                Its mission is to ensure the safety of populations by promoting community resilience and reducing risks. 
+                                By collaborating with various entities, Proteção Civil plays a vital role in protecting lives, property, and the environment.
+                            </p>                </div>
+
+                        <div class="flex flex-col items-center text-center group">
+                            <div class="w-24 h-24 mb-6 mx-auto transition-transform duration-300 group-hover:scale-110">
+                                <img src="http://localhost:1313/ist1109562/electrocap/images/bombeiros.png"  alt="Fire Department Logo" class="w-full h-full object-contain">
+                            </div>
+                            <h3 class="font-bold text-xl text-foreground mb-2">Fire Department</h3>
+                            <p class="text-sm text-muted-foreground leading-relaxed">The firefighters are dedicated to protecting lives, property, and the environment through fire prevention, 
+                                emergency response, and rescue operations. They play a critical role in ensuring public safety and providing assistance 
+                                during natural disasters, accidents, and other emergencies.
+                              </p>                        </div>
+
+                        <div class="flex flex-col items-center text-center group">
+                            <div class="w-24 h-24 mb-6 mx-auto transition-transform duration-300 group-hover:scale-110">
+                                <img src="http://localhost:1313/ist1109562/electrocap/images/camara.jpg"  alt="City Council Logo" class="w-full h-full object-contain">
+                            </div>
+                            <h3 class="font-bold text-xl text-foreground mb-2">City Council</h3>
+                            <p class="text-sm text-muted-foreground leading-relaxed">The City Council is responsible for managing the city’s urban development, public services, 
+                                and cultural initiatives. It aims to create a sustainable, inclusive, and innovative environment for residents and visitors alike, 
+                                ensuring the continuous growth and modernization of Portugal’s capital.
+                              </p>                        </div>
+
+                    </div>
+                </div>
+            </section>
+            <section id="timeline-preview" class="py-24 bg-background relative">
+                <div class="container mx-auto px-6">
+                    <div class="flex flex-col lg:flex-row gap-16 items-start">
+                        
+                        <div class="lg:w-5/12 pt-4">
+                            <div class="inline-flex items-center gap-2 mb-6">
+                                <span class="w-8 h-[2px] bg-accent"></span>
+                                <span class="text-xs font-black text-primary uppercase tracking-[0.2em]">JAN-JUN</span>
+                            </div>
+                            
+                            <h2 class="text-5xl font-black text-primary mb-8 leading-[1.1] uppercase tracking-tighter">
+                                Eletrocap<br><span class="text-stone-400">Timeline</span>
+                            </h2>
+                            
+                            <p class="text-stone-500 mb-10 leading-relaxed text-lg max-w-md">
+                                Follow the development of <strong>ElectroCap</strong>. From hardware design to real-time smoke detection testing.
+                            </p>
+            
+                            <a href="http://localhost:1313/ist1109562/electrocap/calendario" class="group inline-flex items-center gap-6 font-black text-sm tracking-[0.15em] text-primary hover:text-accent transition-all uppercase">
+                                Open Full Calendar
+                                <span class="w-12 h-12 rounded-full border border-stone-200 flex items-center justify-center group-hover:border-accent group-hover:bg-accent group-hover:text-white transition-all">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                                </span>
+                            </a>
+                        </div>
+            
+                        <div class="lg:w-7/12 w-full">
+                            <div class="bg-white rounded-3xl shadow-[0_32px_64px_-12px_rgba(0,0,0,0.08)] border border-stone-100 overflow-hidden">
+                                
+                                <div class="p-8 border-b border-stone-50 flex justify-between items-center bg-stone-50/30">
+                                    <h3 class="font-black text-2xl text-primary tracking-tighter uppercase">Week 03 — Feb</h3>
+                                </div>
+            
+                                <div class="grid grid-cols-7 text-center border-b border-stone-50">
+                                    <div class="py-4 text-[10px] font-black text-stone-300 tracking-widest">MON</div>
+                                    <div class="py-4 text-[10px] font-black text-stone-300 tracking-widest">TUE</div>
+                                    <div class="py-4 text-[10px] font-black text-stone-300 tracking-widest">WED</div>
+                                    <div class="py-4 text-[10px] font-black text-stone-300 tracking-widest">THU</div>
+                                    <div class="py-4 text-[10px] font-black text-stone-300 tracking-widest">FRI</div>
+                                    <div class="py-4 text-[10px] font-black text-accent/40 tracking-widest">SAT</div>
+                                    <div class="py-4 text-[10px] font-black text-accent/40 tracking-widest">SUN</div>
+                                </div>
+            
+                                <div class="grid grid-cols-7 h-64">
+                                    <div class="p-4 border-r border-stone-50 flex flex-col gap-2">
+                                        <span class="text-sm font-bold text-stone-300">21</span>
+                                    </div>
+                                    
+                                    <div class="p-4 border-r border-stone-50 bg-stone-50/20 flex flex-col gap-2">
+                                        <span class="text-sm font-bold text-stone-400">22</span>
+                                        <div class="p-2 bg-orange-100/80 text-orange-800 border-l-4 border-orange-500 text-[9px] font-black uppercase leading-tight rounded-r shadow-sm">
+                                            Pitch<br>Started
+                                        </div>
+                                    </div>
+            
+                                    <div class="p-4 border-r border-stone-50 flex flex-col gap-2">
+                                        <span class="text-sm font-bold text-stone-400">23</span>
+                                    </div>
+            
+                                    <div class="p-4 border-r border-stone-50 flex flex-col gap-2">
+                                        <span class="text-sm font-bold text-stone-400">24</span>
+                                        <div class="p-2 bg-stone-100 text-stone-600 border-l-4 border-stone-400 text-[9px] font-black uppercase leading-tight rounded-r shadow-sm">
+                                            Group<br>Meeting
+                                        </div>
+                                    </div>
+            
+                                    <div class="p-4 border-r border-stone-50 flex flex-col gap-2">
+                                        <span class="text-sm font-bold text-stone-400">25</span>
+                                        <div class="p-2 bg-green-100 text-green-600 border-l-4 border-green-400 text-[9px] font-black uppercase leading-tight rounded-r shadow-sm">
+                                            Seminar<br> with Magma CEO
+                                        </div>
+                                    </div>
+                                    
+            
+                                    <div class="p-4 border-r border-stone-50 bg-stone-50/40"></div>
+                                    <div class="p-4 bg-stone-50/40"></div>
+                                </div>
+                            </div>
+                        </div>
+            
+                    </div>
+                </div>
+            </section>
+</section>
+
+
+            <footer class="bg-[#1B4D3E] text-white py-12 border-t border-white/10">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid md:grid-cols-3 gap-8 lg:gap-12 mb-12">
+                        
+                        <div class="space-y-4">
+                            <span class="text-xl font-bold">ElectroCap</span>
+                            <p class="text-white/80 leading-relaxed text-sm max-w-xs">
+                                Forest fire detection and early warning systems.
+                            </p>
+                        </div>
+
+                        <div>
+                            <h3 class="font-bold text-lg mb-4 opacity-90 text-[#ecfdf5]">Quick Links</h3>
+                            <ul class="space-y-3 text-sm text-white/70">
+                                <li><a href="#project" class="hover:text-white transition-colors">About the Project</a></li>
+                                <li><a href="#team" class="hover:text-white transition-colors">Team</a></li>
+                                <li><a href="#partners" class="hover:text-white transition-colors">Partners</a></li>
+                                <li><a href="http://localhost:1313/ist1109562/electrocap/posts" class="hover:text-white transition-colors">Blog</a>
+                                <li><a href="http://localhost:1313/ist1109562/electrocap/calendario" class="hover:text-white transition-colors">Timeline</a>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 class="font-bold text-lg mb-4 opacity-90 text-[#ecfdf5]">Contact Us</h3>
+                            <div class="space-y-4 text-sm text-white/70">
+                                <p class="flex items-center gap-3">
+                                    📍 Avenida Rovisco Pais 1, Lisboa
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-8 border-t border-white/10 flex justify-between items-center gap-4 text-xs sm:text-sm text-white/60">
+                        <p>© 2026 ElectroCap - Instituto Superior Técnico. All rights reserved.</p>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+    </div>
+</body>
+</html>

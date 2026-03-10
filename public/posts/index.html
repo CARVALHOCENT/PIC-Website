@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - ElectroCap Blog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: { 
+                    fontFamily: { 'sans': ['Inter', 'sans-serif'] },
+                    colors: { 
+                        primary: '#1B4D3E',      
+                        accent: '#F97316',       
+                        'accent-hover': '#EA580C',
+                        background: '#F0F2F0',   
+                        surface: '#FFFFFF',
+                        foreground: '#1C211C'    
+                    } 
+                }
+            }
+        }
+    </script>
+    <style>
+        .blog-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .blog-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(27, 77, 62, 0.1), 0 10px 10px -5px rgba(27, 77, 62, 0.04);
+        }
+    </style>
+</head>
+<body class="bg-background min-h-screen font-sans text-foreground">
+    
+    <nav class="bg-white/80 backdrop-blur-md border-b border-primary/10 sticky top-0 z-50">
+        <div class="container mx-auto px-6 flex justify-between items-center h-20">
+            <a href="http://localhost:1313/ist1109562/electrocap/" class="font-bold text-sm uppercase tracking-tighter flex items-center gap-2 hover:text-accent transition-all text-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                BACK
+            </a>
+            <span class="font-black text-xs uppercase tracking-[0.2em] text-primary/40">ElectroCap Journal</span>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-6 py-16 max-w-7xl">
+        <header class="mb-16">
+            <div class="inline-flex items-center gap-2 mb-4">
+                <span class="w-12 h-[2px] bg-accent"></span>
+                <span class="text-xs font-black text-primary uppercase tracking-[0.2em]">Insights & Updates</span>
+            </div>
+            <h1 class="text-5xl md:text-6xl font-black text-primary uppercase tracking-tighter leading-none">
+                Our <span class="text-primary/40">Blog</span>
+            </h1>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <article class="bg-white rounded-3xl overflow-hidden blog-card border border-stone-100 flex flex-col group">
+                
+                <div class="relative aspect-[16/10] overflow-hidden bg-primary">
+                    
+                        <img src="/ist1109562/electrocap/images/.png" alt="APRESENTATION" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    
+                    <div class="absolute top-4 left-4">
+                        <span class="bg-accent text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider">
+                            10 Mar
+                        </span>
+                    </div>
+                </div>
+        
+                <div class="p-8 flex flex-col flex-1">
+                    <h2 class="text-xl font-bold text-primary uppercase leading-tight mb-4 group-hover:text-accent transition-colors line-clamp-2">
+                        <a href="/posts/apresentacao/">APRESENTATION</a>
+                    </h2>
+                    
+                    <p class="text-stone-500 text-sm leading-relaxed mb-8 line-clamp-3">
+                        Apresentation group
+                    </p>
+
+                    <a href="/posts/apresentacao/" class="mt-auto inline-flex items-center gap-4 text-xs font-black uppercase tracking-widest text-primary hover:text-accent transition-all">
+                        Ler Artigo 
+                        <span class="w-10 h-10 rounded-full border border-stone-100 flex items-center justify-center group-hover:border-accent group-hover:bg-accent group-hover:text-white transition-all">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </span>
+                    </a>
+                </div>
+            </article>
+            
+            <article class="bg-white rounded-3xl overflow-hidden blog-card border border-stone-100 flex flex-col group">
+                
+                <div class="relative aspect-[16/10] overflow-hidden bg-primary">
+                    
+                        <img src="/ist1109562/electrocap/images/entrevista.png" alt="INTERVIEW" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    
+                    <div class="absolute top-4 left-4">
+                        <span class="bg-accent text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider">
+                            06 Mar
+                        </span>
+                    </div>
+                </div>
+        
+                <div class="p-8 flex flex-col flex-1">
+                    <h2 class="text-xl font-bold text-primary uppercase leading-tight mb-4 group-hover:text-accent transition-colors line-clamp-2">
+                        <a href="/posts/entrevista/">INTERVIEW</a>
+                    </h2>
+                    
+                    <p class="text-stone-500 text-sm leading-relaxed mb-8 line-clamp-3">
+                        Interviews with Vendas Novas Volunteer Firefighters.
+                    </p>
+
+                    <a href="/posts/entrevista/" class="mt-auto inline-flex items-center gap-4 text-xs font-black uppercase tracking-widest text-primary hover:text-accent transition-all">
+                        Ler Artigo 
+                        <span class="w-10 h-10 rounded-full border border-stone-100 flex items-center justify-center group-hover:border-accent group-hover:bg-accent group-hover:text-white transition-all">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </span>
+                    </a>
+                </div>
+            </article>
+            
+            <article class="bg-white rounded-3xl overflow-hidden blog-card border border-stone-100 flex flex-col group">
+                
+                <div class="relative aspect-[16/10] overflow-hidden bg-primary">
+                    
+                        <img src="/ist1109562/electrocap/images/.jpeg" alt="RESULTS" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    
+                    <div class="absolute top-4 left-4">
+                        <span class="bg-accent text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider">
+                            02 Mar
+                        </span>
+                    </div>
+                </div>
+        
+                <div class="p-8 flex flex-col flex-1">
+                    <h2 class="text-xl font-bold text-primary uppercase leading-tight mb-4 group-hover:text-accent transition-colors line-clamp-2">
+                        <a href="/posts/resultados/">RESULTS</a>
+                    </h2>
+                    
+                    <p class="text-stone-500 text-sm leading-relaxed mb-8 line-clamp-3">
+                        Feedback Meeting
+                    </p>
+
+                    <a href="/posts/resultados/" class="mt-auto inline-flex items-center gap-4 text-xs font-black uppercase tracking-widest text-primary hover:text-accent transition-all">
+                        Ler Artigo 
+                        <span class="w-10 h-10 rounded-full border border-stone-100 flex items-center justify-center group-hover:border-accent group-hover:bg-accent group-hover:text-white transition-all">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </span>
+                    </a>
+                </div>
+            </article>
+            
+            <article class="bg-white rounded-3xl overflow-hidden blog-card border border-stone-100 flex flex-col group">
+                
+                <div class="relative aspect-[16/10] overflow-hidden bg-primary">
+                    
+                        <img src="/ist1109562/electrocap/images/week3.png" alt="SITE" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    
+                    <div class="absolute top-4 left-4">
+                        <span class="bg-accent text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider">
+                            01 Mar
+                        </span>
+                    </div>
+                </div>
+        
+                <div class="p-8 flex flex-col flex-1">
+                    <h2 class="text-xl font-bold text-primary uppercase leading-tight mb-4 group-hover:text-accent transition-colors line-clamp-2">
+                        <a href="/posts/site/">SITE</a>
+                    </h2>
+                    
+                    <p class="text-stone-500 text-sm leading-relaxed mb-8 line-clamp-3">
+                        Website launched and architecture started
+                    </p>
+
+                    <a href="/posts/site/" class="mt-auto inline-flex items-center gap-4 text-xs font-black uppercase tracking-widest text-primary hover:text-accent transition-all">
+                        Ler Artigo 
+                        <span class="w-10 h-10 rounded-full border border-stone-100 flex items-center justify-center group-hover:border-accent group-hover:bg-accent group-hover:text-white transition-all">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </span>
+                    </a>
+                </div>
+            </article>
+            
+            <article class="bg-white rounded-3xl overflow-hidden blog-card border border-stone-100 flex flex-col group">
+                
+                <div class="relative aspect-[16/10] overflow-hidden bg-primary">
+                    
+                        <img src="/ist1109562/electrocap/images/week2.jpg" alt="SEMINAR" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    
+                    <div class="absolute top-4 left-4">
+                        <span class="bg-accent text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider">
+                            25 Feb
+                        </span>
+                    </div>
+                </div>
+        
+                <div class="p-8 flex flex-col flex-1">
+                    <h2 class="text-xl font-bold text-primary uppercase leading-tight mb-4 group-hover:text-accent transition-colors line-clamp-2">
+                        <a href="/posts/semina%CC%81rio1/">SEMINAR</a>
+                    </h2>
+                    
+                    <p class="text-stone-500 text-sm leading-relaxed mb-8 line-clamp-3">
+                        Meeting with MAGMA CEO
+                    </p>
+
+                    <a href="/posts/semina%CC%81rio1/" class="mt-auto inline-flex items-center gap-4 text-xs font-black uppercase tracking-widest text-primary hover:text-accent transition-all">
+                        Ler Artigo 
+                        <span class="w-10 h-10 rounded-full border border-stone-100 flex items-center justify-center group-hover:border-accent group-hover:bg-accent group-hover:text-white transition-all">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </span>
+                    </a>
+                </div>
+            </article>
+            
+            <article class="bg-white rounded-3xl overflow-hidden blog-card border border-stone-100 flex flex-col group">
+                
+                <div class="relative aspect-[16/10] overflow-hidden bg-primary">
+                    
+                        <img src="/ist1109562/electrocap/images/week1.png" alt="MEETING" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    
+                    <div class="absolute top-4 left-4">
+                        <span class="bg-accent text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider">
+                            24 Feb
+                        </span>
+                    </div>
+                </div>
+        
+                <div class="p-8 flex flex-col flex-1">
+                    <h2 class="text-xl font-bold text-primary uppercase leading-tight mb-4 group-hover:text-accent transition-colors line-clamp-2">
+                        <a href="/posts/reuniao2/">MEETING</a>
+                    </h2>
+                    
+                    <p class="text-stone-500 text-sm leading-relaxed mb-8 line-clamp-3">
+                        Group Meeting with our advisor and co-advisor
+                    </p>
+
+                    <a href="/posts/reuniao2/" class="mt-auto inline-flex items-center gap-4 text-xs font-black uppercase tracking-widest text-primary hover:text-accent transition-all">
+                        Ler Artigo 
+                        <span class="w-10 h-10 rounded-full border border-stone-100 flex items-center justify-center group-hover:border-accent group-hover:bg-accent group-hover:text-white transition-all">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </span>
+                    </a>
+                </div>
+            </article>
+            
+            <article class="bg-white rounded-3xl overflow-hidden blog-card border border-stone-100 flex flex-col group">
+                
+                <div class="relative aspect-[16/10] overflow-hidden bg-primary">
+                    
+                        <img src="/ist1109562/electrocap/images/pitch.jpeg" alt="PITCH" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    
+                    <div class="absolute top-4 left-4">
+                        <span class="bg-accent text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider">
+                            19 Feb
+                        </span>
+                    </div>
+                </div>
+        
+                <div class="p-8 flex flex-col flex-1">
+                    <h2 class="text-xl font-bold text-primary uppercase leading-tight mb-4 group-hover:text-accent transition-colors line-clamp-2">
+                        <a href="/posts/pitch/">PITCH</a>
+                    </h2>
+                    
+                    <p class="text-stone-500 text-sm leading-relaxed mb-8 line-clamp-3">
+                        Feedback Meeting
+                    </p>
+
+                    <a href="/posts/pitch/" class="mt-auto inline-flex items-center gap-4 text-xs font-black uppercase tracking-widest text-primary hover:text-accent transition-all">
+                        Ler Artigo 
+                        <span class="w-10 h-10 rounded-full border border-stone-100 flex items-center justify-center group-hover:border-accent group-hover:bg-accent group-hover:text-white transition-all">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </span>
+                    </a>
+                </div>
+            </article>
+            
+            <article class="bg-white rounded-3xl overflow-hidden blog-card border border-stone-100 flex flex-col group">
+                
+                <div class="relative aspect-[16/10] overflow-hidden bg-primary">
+                    
+                        <img src="/ist1109562/electrocap/images/sample.png" alt="STUDY SAMPLE" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    
+                    <div class="absolute top-4 left-4">
+                        <span class="bg-accent text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider">
+                            27 Jan
+                        </span>
+                    </div>
+                </div>
+        
+                <div class="p-8 flex flex-col flex-1">
+                    <h2 class="text-xl font-bold text-primary uppercase leading-tight mb-4 group-hover:text-accent transition-colors line-clamp-2">
+                        <a href="/posts/sample/">STUDY SAMPLE</a>
+                    </h2>
+                    
+                    <p class="text-stone-500 text-sm leading-relaxed mb-8 line-clamp-3">
+                        Building Our Study Sample
+                    </p>
+
+                    <a href="/posts/sample/" class="mt-auto inline-flex items-center gap-4 text-xs font-black uppercase tracking-widest text-primary hover:text-accent transition-all">
+                        Ler Artigo 
+                        <span class="w-10 h-10 rounded-full border border-stone-100 flex items-center justify-center group-hover:border-accent group-hover:bg-accent group-hover:text-white transition-all">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </span>
+                    </a>
+                </div>
+            </article>
+            
+            <article class="bg-white rounded-3xl overflow-hidden blog-card border border-stone-100 flex flex-col group">
+                
+                <div class="relative aspect-[16/10] overflow-hidden bg-primary">
+                    
+                        <img src="/ist1109562/electrocap/images/reuniao1.png" alt="MEETING" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    
+                    <div class="absolute top-4 left-4">
+                        <span class="bg-accent text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider">
+                            26 Jan
+                        </span>
+                    </div>
+                </div>
+        
+                <div class="p-8 flex flex-col flex-1">
+                    <h2 class="text-xl font-bold text-primary uppercase leading-tight mb-4 group-hover:text-accent transition-colors line-clamp-2">
+                        <a href="/posts/reuniao1/">MEETING</a>
+                    </h2>
+                    
+                    <p class="text-stone-500 text-sm leading-relaxed mb-8 line-clamp-3">
+                        Group Meeting with our advisor and co-advisor
+                    </p>
+
+                    <a href="/posts/reuniao1/" class="mt-auto inline-flex items-center gap-4 text-xs font-black uppercase tracking-widest text-primary hover:text-accent transition-all">
+                        Ler Artigo 
+                        <span class="w-10 h-10 rounded-full border border-stone-100 flex items-center justify-center group-hover:border-accent group-hover:bg-accent group-hover:text-white transition-all">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </span>
+                    </a>
+                </div>
+            </article>
+            
+        </div>
+    </main>
+
+    <footer class="bg-primary text-white py-16 mt-20">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col items-center text-center">
+                <span class="text-2xl font-black tracking-tighter uppercase mb-2">ElectroCap</span>
+                <p class="text-white/40 text-[10px] font-bold uppercase tracking-[0.4em] mb-8">Tecnologia para Preservação Florestal</p>
+                
+                <div class="w-full h-px bg-white/10 mb-8"></div>
+                
+                <p class="text-white/30 text-[9px] uppercase tracking-widest">
+                    © 2026 Instituto Superior Técnico. Todos os direitos reservados.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Home on ElectroCap</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content in Home on ElectroCap</description>
+    <generator>Hugo</generator>
+    <language>pt-pt</language>
+    <lastBuildDate>Tue, 10 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>APRESENTATION</title>
+      <link>http://localhost:1313/posts/apresentacao/</link>
+      <pubDate>Tue, 10 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/apresentacao/</guid>
+      <description>Apresentation group</description>
+    </item>
+    <item>
+      <title>INTERVIEW</title>
+      <link>http://localhost:1313/posts/entrevista/</link>
+      <pubDate>Fri, 06 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/entrevista/</guid>
+      <description>Interviews with Vendas Novas Volunteer Firefighters.</description>
+    </item>
+    <item>
+      <title>RESULTS</title>
+      <link>http://localhost:1313/posts/resultados/</link>
+      <pubDate>Mon, 02 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/resultados/</guid>
+      <description>Feedback Meeting</description>
+    </item>
+    <item>
+      <title>SITE</title>
+      <link>http://localhost:1313/posts/site/</link>
+      <pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/site/</guid>
+      <description>Website launched and architecture started</description>
+    </item>
+    <item>
+      <title>SEMINAR</title>
+      <link>http://localhost:1313/posts/semina%CC%81rio1/</link>
+      <pubDate>Wed, 25 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/semina%CC%81rio1/</guid>
+      <description>Meeting with MAGMA CEO</description>
+    </item>
+    <item>
+      <title>MEETING</title>
+      <link>http://localhost:1313/posts/reuniao2/</link>
+      <pubDate>Tue, 24 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/reuniao2/</guid>
+      <description>Group Meeting with our advisor and co-advisor</description>
+    </item>
+    <item>
+      <title>PITCH</title>
+      <link>http://localhost:1313/posts/pitch/</link>
+      <pubDate>Thu, 19 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/pitch/</guid>
+      <description>Feedback Meeting</description>
+    </item>
+    <item>
+      <title>STUDY SAMPLE</title>
+      <link>http://localhost:1313/posts/sample/</link>
+      <pubDate>Tue, 27 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/sample/</guid>
+      <description>Building Our Study Sample</description>
+    </item>
+    <item>
+      <title>MEETING</title>
+      <link>http://localhost:1313/posts/reuniao1/</link>
+      <pubDate>Mon, 26 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/reuniao1/</guid>
+      <description>Group Meeting with our advisor and co-advisor</description>
+    </item>
+  </channel>
+</rss>

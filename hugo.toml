@@ -1,4 +1,4 @@
-baseURL = "baseURL = "https://pic-website.vercel.app/""
+baseURL = "https://pic-website.vercel.app/"
 languageCode = 'pt-pt'
 title = 'ElectroCap'
 theme = 'PaperMod'
